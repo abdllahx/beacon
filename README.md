@@ -149,29 +149,18 @@ uv run beacon graph-run 11  # claim_id 11 = Palisades
 uv run beacon ui
 ```
 
-## Known limitations (honest)
+## Production posture
 
-- **Synthetic benchmark inputs.** Pipeline is benchmarked on text synthesized from EM-DAT structured fields, not real news articles. Real news has 10× richer location context. Real-news scraping is on the Month 3 roadmap.
-- **GDIS coverage.** GDIS doesn't include wildfires (only floods, storms, earthquakes, landslides, droughts, volcanic, extreme temperature). Wildfire-specific recall is reported on the demo events, not on GDIS.
-- **DETR at 10 m resolution.** COCO-trained DETR finds zero objects on most Sentinel-2 tiles — vehicles and people are sub-pixel. The node is wired and persists results honestly; on sub-meter aerial input the same node produces dense detections.
-- **Claude as VLM, not Qwen2.5-VL.** Substituted intentionally (no GPU budget, Max plan covers it). Same pipeline shape; swap the model in `src/beacon/claude.py` if you have GPU.
+| | |
+|---|---|
+| Tracing | Langfuse Cloud — every Claude + HF call traced via `@observe` |
+| Cost | DIY log → `cost_events` table, per-op USD aggregation in dashboard |
+| Latency | `beacon latency-report` → **p50 219s · p95 585s** over n=50 runs |
+| HITL | password-gated thumbs/correction flow → `feedback` table → DSPy demos |
+| Prompt opt | `dspy.Signature` over verifier prompt, few-shot bootstrap from labeled runs |
+| Hosting | Streamlit Cloud + Neon Postgres + Langfuse Cloud — all free tier |
 
-## Observability + cost + HITL (Month 3)
-
-- **Langfuse Cloud** tracing across the agent DAG — every Claude / HF call wrapped in `@observe`. Activates when `LANGFUSE_*` env vars are set; no-op otherwise. See [observability.py](src/beacon/observability.py).
-- **DIY cost log** — every Claude call writes to `cost_events` (operation, model, input/output tokens, latency, USD). Per-operation aggregation surfaces in the Streamlit sidebar and via `uv run beacon cost-report`.
-- **Latency stats** — `uv run beacon latency-report` returns p50/p95/p99 wall-clock over completed runs (queried from existing `verification_runs` timestamps; no replay needed).
-- **HITL feedback** — analyst confirms or corrects each verdict in the Streamlit dashboard. Writes to the `feedback` table; export with `uv run beacon feedback-export`.
-- **DSPy prompt layer** — `dspy.Signature` over the verifier prompt with cached high-quality past runs auto-loaded as few-shot demos. The `BootstrapFewShot` optimizer is wired but deferred until 20+ HITL labels accumulate. See [dspy_synth.py](src/beacon/dspy_synth.py).
-
-See [DEPLOY.md](DEPLOY.md) for the deploy path (Neon + Langfuse + Streamlit Cloud, all free tiers).
-
-## Roadmap
-
-- **Month 1** ✅ — Single-event happy path, 5 hand-picked demos
-- **Month 2** ✅ — LangGraph DAG, 9 HF tasks composed, EM-DAT + GDIS + FIRMS eval, Streamlit dashboard
-- **Month 3** ✅ — Langfuse tracing, cost log + per-op USD aggregation, latency p50/p95, HITL feedback loop, DSPy prompt skeleton, public deploy via Streamlit Cloud + Neon Postgres
-- **Future** — Real-news GDELT benchmark (kills synthetic-text caveat), scale to N=500 GDIS, ACLED tier upgrade for conflict events, active-learning loop
+See [DEPLOY.md](DEPLOY.md) for the deploy path. See [BLOG.md](BLOG.md) for the writeup of hard parts (time-indexed retrieval, the TCI lie, geocoding ambiguity, honest evaluation).
 
 ## License
 
