@@ -1,7 +1,30 @@
+import os
+
 import streamlit as st
 
 from beacon import cost as cost_mod
 from beacon import db, latency
+
+REVIEWER_PASSWORD = os.getenv("REVIEWER_PASSWORD")  # set in Streamlit Cloud Secrets
+
+
+def _hitl_unlocked() -> bool:
+    """True when no password is configured (local dev) OR the user typed it correctly."""
+    if not REVIEWER_PASSWORD:
+        return True
+    if st.session_state.get("hitl_authed"):
+        return True
+    pw = st.text_input(
+        "Reviewer password (HITL writes locked)",
+        type="password",
+        key="hitl_pw_input",
+    )
+    if pw and pw == REVIEWER_PASSWORD:
+        st.session_state["hitl_authed"] = True
+        st.rerun()
+    elif pw:
+        st.error("Wrong password.")
+    return False
 
 st.set_page_config(page_title="Beacon — Geospatial Event Verification", layout="wide")
 st.title("Beacon — Multimodal Geospatial Event Verification")
@@ -310,8 +333,11 @@ st.caption(
     "Reviewer corrections feed the DSPy training set. Routes to the `feedback` "
     "table for next-iteration prompt optimization."
 )
-fb_cols = st.columns([1, 1, 3])
 run_id = run["id"]
+if not _hitl_unlocked():
+    st.info("HITL writes are locked on the public demo. Authorized reviewers only.")
+    st.stop()
+fb_cols = st.columns([1, 1, 3])
 if fb_cols[0].button("👍 Confirm", key=f"thumbs_up_{run_id}"):
     with db.connect() as conn, conn.cursor() as cur:
         cur.execute(
