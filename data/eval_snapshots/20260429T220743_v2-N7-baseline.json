@@ -1,0 +1,153 @@
+{
+  "id": "20260429T220743_v2-N7-baseline",
+  "label": "v2-N7-baseline",
+  "created_at": "2026-04-29T22:07:43.828152+00:00",
+  "git_sha": "uncommitted",
+  "git_dirty": true,
+  "gdis_only": true,
+  "tunables": {
+    "ACCURACY_THRESHOLDS_KM": [
+      10,
+      50,
+      161
+    ],
+    "DEFAULT_AFTER_DAYS": 14,
+    "DEFAULT_BEFORE_DAYS": 30,
+    "DEFAULT_TILE_SIZE_PX": 1024,
+    "DNBR_BAND_LOW_MAX": 0.27,
+    "DNBR_BAND_MODERATE_HIGH_MAX": 0.66,
+    "DNBR_BAND_MODERATE_LOW_MAX": 0.44,
+    "DNBR_BAND_UNBURNED_MAX": 0.1,
+    "DNBR_BURN_PCT_THRESHOLD": 0.27,
+    "MAX_BBOX_DEG": 1.0,
+    "MAX_INPUT_CHARS": 2000,
+    "MAX_NER_CANDIDATES": 4,
+    "MIN_BBOX_DEG": 0.02,
+    "MIN_NER_SCORE": 0.7,
+    "NOMINATIM_REQUEST_INTERVAL_S": 1.1,
+    "NOMINATIM_RESULTS_PER_LOC": 3,
+    "RELEVANCE_THRESHOLD": 0.3,
+    "S1_DECREASE_THRESHOLD_DB": 3.0
+  },
+  "metrics": {
+    "label": "gdis_validated_only",
+    "n": 7,
+    "ground_truth_source": {
+      "gdis": 7
+    },
+    "verdicts": {
+      "inconclusive": 7
+    },
+    "recall_supported": 0.0,
+    "inconclusive_rate": 1.0,
+    "refuted_rate": 0.0,
+    "mean_confidence": 0.35,
+    "geoparsing": {
+      "n_with_distance": 7,
+      "mean_centroid_distance_km": 85.2,
+      "median_centroid_distance_km": 28.7,
+      "accuracy": {
+        "@10km": 0.286,
+        "@50km": 0.714,
+        "@161km": 0.857
+      }
+    },
+    "spatial": {
+      "n_with_iou": 7,
+      "mean_bbox_iou": 0.091
+    },
+    "by_type": {
+      "Flood": {
+        "n": 3,
+        "recall_supported": 0.0
+      },
+      "Storm": {
+        "n": 1,
+        "recall_supported": 0.0
+      },
+      "Earthquake": {
+        "n": 3,
+        "recall_supported": 0.0
+      }
+    }
+  },
+  "per_event": [
+    {
+      "benchmark_run_id": 38,
+      "dis_no": "2018-0135-RWA",
+      "disaster_type": "Flood",
+      "country": "Rwanda",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 8.7,
+      "iou": 0.3457
+    },
+    {
+      "benchmark_run_id": 39,
+      "dis_no": "2018-0218-DOM",
+      "disaster_type": "Flood",
+      "country": "Dominican Republic",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 84.7,
+      "iou": 0.0018
+    },
+    {
+      "benchmark_run_id": 40,
+      "dis_no": "2018-0383-IRN",
+      "disaster_type": "Flood",
+      "country": "Iran (Islamic Republic of)",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.4,
+      "centroid_distance_km": 413.0,
+      "iou": 0.0273
+    },
+    {
+      "benchmark_run_id": 41,
+      "dis_no": "2018-0161-ARG",
+      "disaster_type": "Storm",
+      "country": "Argentina",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.3,
+      "centroid_distance_km": 3.2,
+      "iou": 0.1399
+    },
+    {
+      "benchmark_run_id": 42,
+      "dis_no": "2018-0310-IRN",
+      "disaster_type": "Earthquake",
+      "country": "Iran (Islamic Republic of)",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 44.4,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 43,
+      "dis_no": "2018-0055-PNG",
+      "disaster_type": "Earthquake",
+      "country": "Papua New Guinea",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.3,
+      "centroid_distance_km": 13.9,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 44,
+      "dis_no": "2018-0330-JPN",
+      "disaster_type": "Earthquake",
+      "country": "Japan",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.4,
+      "centroid_distance_km": 28.7,
+      "iou": 0.1226
+    }
+  ]
+}

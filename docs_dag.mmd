@@ -1,0 +1,64 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	extract_claim(extract_claim)
+	geocode_claim(geocode_claim)
+	load_claim(load_claim)
+	init_run(init_run)
+	fetch_s2_before(fetch_s2_before)
+	fetch_s2_after(fetch_s2_after)
+	fetch_nbr_before(fetch_nbr_before)
+	fetch_nbr_after(fetch_nbr_after)
+	compute_dnbr(compute_dnbr)
+	fetch_s1_before(fetch_s1_before)
+	fetch_s1_after(fetch_s1_after)
+	compute_s1_change(compute_s1_change)
+	segment_after(segment_after)
+	detect_after(detect_after)
+	classify_tile(classify_tile)
+	vdr_search(vdr_search)
+	vision_vqa(vision_vqa)
+	persist_vision(persist_vision)
+	synthesize(synthesize)
+	summarize_article(summarize_article)
+	translate_report(translate_report)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> extract_claim;
+	classify_tile --> vision_vqa;
+	compute_dnbr --> vision_vqa;
+	compute_s1_change --> vision_vqa;
+	detect_after --> vision_vqa;
+	extract_claim --> geocode_claim;
+	fetch_nbr_after --> compute_dnbr;
+	fetch_nbr_before --> compute_dnbr;
+	fetch_s1_after --> compute_s1_change;
+	fetch_s1_before --> compute_s1_change;
+	fetch_s2_after --> classify_tile;
+	fetch_s2_after --> detect_after;
+	fetch_s2_after --> segment_after;
+	fetch_s2_after --> vdr_search;
+	fetch_s2_after --> vision_vqa;
+	fetch_s2_before --> vision_vqa;
+	geocode_claim --> load_claim;
+	init_run --> fetch_nbr_after;
+	init_run --> fetch_nbr_before;
+	init_run --> fetch_s1_after;
+	init_run --> fetch_s1_before;
+	init_run --> fetch_s2_after;
+	init_run --> fetch_s2_before;
+	load_claim --> init_run;
+	persist_vision --> summarize_article;
+	persist_vision --> synthesize;
+	segment_after --> vision_vqa;
+	summarize_article --> translate_report;
+	synthesize --> translate_report;
+	vdr_search --> vision_vqa;
+	vision_vqa --> persist_vision;
+	translate_report --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

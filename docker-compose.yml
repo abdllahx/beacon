@@ -1,0 +1,23 @@
+services:
+  db:
+    build:
+      context: ./db
+    image: beacon-db:postgis16-pgvector
+    container_name: beacon-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-beacon}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-beacon}
+      POSTGRES_DB: ${POSTGRES_DB:-beacon}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - beacon-pgdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-beacon} -d ${POSTGRES_DB:-beacon}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  beacon-pgdata:

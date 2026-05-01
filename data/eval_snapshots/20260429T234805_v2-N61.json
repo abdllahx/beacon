@@ -1,0 +1,616 @@
+{
+  "id": "20260429T234805_v2-N61",
+  "label": "v2-N61",
+  "created_at": "2026-04-29T23:48:05.255204+00:00",
+  "git_sha": "uncommitted",
+  "git_dirty": true,
+  "gdis_only": true,
+  "tunables": {
+    "ACCURACY_THRESHOLDS_KM": [
+      10,
+      50,
+      161
+    ],
+    "DEFAULT_AFTER_DAYS": 14,
+    "DEFAULT_BEFORE_DAYS": 30,
+    "DEFAULT_TILE_SIZE_PX": 1024,
+    "DNBR_BAND_LOW_MAX": 0.27,
+    "DNBR_BAND_MODERATE_HIGH_MAX": 0.66,
+    "DNBR_BAND_MODERATE_LOW_MAX": 0.44,
+    "DNBR_BAND_UNBURNED_MAX": 0.1,
+    "DNBR_BURN_PCT_THRESHOLD": 0.27,
+    "MAX_BBOX_DEG": 1.0,
+    "MAX_INPUT_CHARS": 2000,
+    "MAX_NER_CANDIDATES": 4,
+    "MIN_BBOX_DEG": 0.02,
+    "MIN_NER_SCORE": 0.7,
+    "NOMINATIM_REQUEST_INTERVAL_S": 1.1,
+    "NOMINATIM_RESULTS_PER_LOC": 3,
+    "RELEVANCE_THRESHOLD": 0.3,
+    "S1_DECREASE_THRESHOLD_DB": 3.0
+  },
+  "metrics": {
+    "label": "gdis_validated_only",
+    "n": 49,
+    "ground_truth_source": {
+      "gdis": 49
+    },
+    "verdicts": {
+      "inconclusive": 48,
+      "refuted": 1
+    },
+    "recall_supported": 0.0,
+    "inconclusive_rate": 0.98,
+    "refuted_rate": 0.02,
+    "mean_confidence": 0.283,
+    "geoparsing": {
+      "n_with_distance": 49,
+      "mean_centroid_distance_km": 178.2,
+      "median_centroid_distance_km": 81.0,
+      "accuracy": {
+        "@10km": 0.122,
+        "@50km": 0.367,
+        "@161km": 0.673
+      }
+    },
+    "spatial": {
+      "n_with_iou": 49,
+      "mean_bbox_iou": 0.065
+    },
+    "by_type": {
+      "Flood": {
+        "n": 24,
+        "recall_supported": 0.0
+      },
+      "Storm": {
+        "n": 16,
+        "recall_supported": 0.0
+      },
+      "Earthquake": {
+        "n": 9,
+        "recall_supported": 0.0
+      }
+    }
+  },
+  "per_event": [
+    {
+      "benchmark_run_id": 38,
+      "dis_no": "2018-0135-RWA",
+      "disaster_type": "Flood",
+      "country": "Rwanda",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 8.7,
+      "iou": 0.3457
+    },
+    {
+      "benchmark_run_id": 39,
+      "dis_no": "2018-0218-DOM",
+      "disaster_type": "Flood",
+      "country": "Dominican Republic",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 84.7,
+      "iou": 0.0018
+    },
+    {
+      "benchmark_run_id": 40,
+      "dis_no": "2018-0383-IRN",
+      "disaster_type": "Flood",
+      "country": "Iran (Islamic Republic of)",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.4,
+      "centroid_distance_km": 413.0,
+      "iou": 0.0273
+    },
+    {
+      "benchmark_run_id": 41,
+      "dis_no": "2018-0161-ARG",
+      "disaster_type": "Storm",
+      "country": "Argentina",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.3,
+      "centroid_distance_km": 3.2,
+      "iou": 0.1399
+    },
+    {
+      "benchmark_run_id": 42,
+      "dis_no": "2018-0310-IRN",
+      "disaster_type": "Earthquake",
+      "country": "Iran (Islamic Republic of)",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 44.4,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 43,
+      "dis_no": "2018-0055-PNG",
+      "disaster_type": "Earthquake",
+      "country": "Papua New Guinea",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.3,
+      "centroid_distance_km": 13.9,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 44,
+      "dis_no": "2018-0330-JPN",
+      "disaster_type": "Earthquake",
+      "country": "Japan",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.4,
+      "centroid_distance_km": 28.7,
+      "iou": 0.1226
+    },
+    {
+      "benchmark_run_id": 45,
+      "dis_no": "2018-0040-BRA",
+      "disaster_type": "Flood",
+      "country": "Brazil",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.3,
+      "centroid_distance_km": 113.7,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 47,
+      "dis_no": "2018-0387-SDN",
+      "disaster_type": "Flood",
+      "country": "Sudan",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.4,
+      "centroid_distance_km": 451.4,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 48,
+      "dis_no": "2018-0386-VEN",
+      "disaster_type": "Flood",
+      "country": "Venezuela (Bolivarian Republic of)",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.45,
+      "centroid_distance_km": 34.7,
+      "iou": 0.0766
+    },
+    {
+      "benchmark_run_id": 53,
+      "dis_no": "2018-0160-CAN",
+      "disaster_type": "Flood",
+      "country": "Canada",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 135.8,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 54,
+      "dis_no": "2018-0082-ALB",
+      "disaster_type": "Flood",
+      "country": "Albania",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.4,
+      "centroid_distance_km": 38.8,
+      "iou": 0.0291
+    },
+    {
+      "benchmark_run_id": 55,
+      "dis_no": "2018-0062-BOL",
+      "disaster_type": "Flood",
+      "country": "Bolivia (Plurinational State of)",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 238.2,
+      "iou": 0.0309
+    },
+    {
+      "benchmark_run_id": 56,
+      "dis_no": "2018-0329-PRK",
+      "disaster_type": "Flood",
+      "country": "Democratic People's Republic of Korea",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 81.0,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 57,
+      "dis_no": "2018-0112-BRA",
+      "disaster_type": "Flood",
+      "country": "Brazil",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 269.6,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 58,
+      "dis_no": "2018-0323-CHN",
+      "disaster_type": "Earthquake",
+      "country": "China",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.3,
+      "centroid_distance_km": 1.5,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 59,
+      "dis_no": "2018-0183-JPN",
+      "disaster_type": "Earthquake",
+      "country": "Japan",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.3,
+      "centroid_distance_km": 52.6,
+      "iou": 0.227
+    },
+    {
+      "benchmark_run_id": 60,
+      "dis_no": "2018-0315-MEX",
+      "disaster_type": "Earthquake",
+      "country": "Mexico",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.3,
+      "centroid_distance_km": 33.5,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 61,
+      "dis_no": "2018-0426-IRN",
+      "disaster_type": "Earthquake",
+      "country": "Iran (Islamic Republic of)",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.45,
+      "centroid_distance_km": 4.4,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 64,
+      "dis_no": "2018-0215-CHN",
+      "disaster_type": "Earthquake",
+      "country": "China",
+      "gt_source": "gdis",
+      "verdict": "refuted",
+      "confidence": 0.7,
+      "centroid_distance_km": 200.1,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 66,
+      "dis_no": "2018-0011-PER",
+      "disaster_type": "Earthquake",
+      "country": "Peru",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 115.4,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 67,
+      "dis_no": "2018-0097-BLR",
+      "disaster_type": "Flood",
+      "country": "Belarus",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 43.8,
+      "iou": 0.0082
+    },
+    {
+      "benchmark_run_id": 69,
+      "dis_no": "2018-0364-TUN",
+      "disaster_type": "Flood",
+      "country": "Tunisia",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 49.6,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 71,
+      "dis_no": "2018-0345-IND",
+      "disaster_type": "Flood",
+      "country": "India",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 134.2,
+      "iou": 0.004
+    },
+    {
+      "benchmark_run_id": 72,
+      "dis_no": "2018-0286-IND",
+      "disaster_type": "Flood",
+      "country": "India",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.1,
+      "centroid_distance_km": 35.1,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 73,
+      "dis_no": "2018-0374-NIC",
+      "disaster_type": "Flood",
+      "country": "Nicaragua",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 35.1,
+      "iou": 0.1967
+    },
+    {
+      "benchmark_run_id": 74,
+      "dis_no": "2018-0252-CHN",
+      "disaster_type": "Flood",
+      "country": "China",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 239.9,
+      "iou": 0.001
+    },
+    {
+      "benchmark_run_id": 76,
+      "dis_no": "2018-0211-CHN",
+      "disaster_type": "Flood",
+      "country": "China",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 537.7,
+      "iou": 0.125
+    },
+    {
+      "benchmark_run_id": 77,
+      "dis_no": "2018-0292-SDN",
+      "disaster_type": "Flood",
+      "country": "Sudan",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 530.8,
+      "iou": 0.0867
+    },
+    {
+      "benchmark_run_id": 78,
+      "dis_no": "2018-0427-IRQ",
+      "disaster_type": "Flood",
+      "country": "Iraq",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 78.6,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 79,
+      "dis_no": "2018-0222-LAO",
+      "disaster_type": "Flood",
+      "country": "Lao People's Democratic Republic",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 7.8,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 80,
+      "dis_no": "2018-0295-IND",
+      "disaster_type": "Flood",
+      "country": "India",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 81.8,
+      "iou": 0.0281
+    },
+    {
+      "benchmark_run_id": 81,
+      "dis_no": "2018-0308-ITA",
+      "disaster_type": "Flood",
+      "country": "Italy",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 58.9,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 82,
+      "dis_no": "2018-0038-ARG",
+      "disaster_type": "Flood",
+      "country": "Argentina",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 441.3,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 83,
+      "dis_no": "2018-0101-FJI",
+      "disaster_type": "Storm",
+      "country": "Fiji",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 37.3,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 84,
+      "dis_no": "2018-0366-CAN",
+      "disaster_type": "Storm",
+      "country": "Canada",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 482.3,
+      "iou": 0.0039
+    },
+    {
+      "benchmark_run_id": 85,
+      "dis_no": "2018-0170-CUB",
+      "disaster_type": "Storm",
+      "country": "Cuba",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 47.2,
+      "iou": 0.0199
+    },
+    {
+      "benchmark_run_id": 86,
+      "dis_no": "2018-0248-UKR",
+      "disaster_type": "Storm",
+      "country": "Ukraine",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 119.7,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 87,
+      "dis_no": "2018-0347-CHN",
+      "disaster_type": "Storm",
+      "country": "China",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 73.3,
+      "iou": 0.3658
+    },
+    {
+      "benchmark_run_id": 89,
+      "dis_no": "2018-0025-BEL",
+      "disaster_type": "Storm",
+      "country": "Belgium",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.3,
+      "centroid_distance_km": 103.2,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 90,
+      "dis_no": "2018-0342-USA",
+      "disaster_type": "Storm",
+      "country": "United States of America",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.45,
+      "centroid_distance_km": 60.7,
+      "iou": 0.202
+    },
+    {
+      "benchmark_run_id": 91,
+      "dis_no": "2018-0353-JPN",
+      "disaster_type": "Storm",
+      "country": "Japan",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 1152.0,
+      "iou": 0.0942
+    },
+    {
+      "benchmark_run_id": 92,
+      "dis_no": "2018-0149-IND",
+      "disaster_type": "Storm",
+      "country": "India",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.35,
+      "centroid_distance_km": 529.2,
+      "iou": 0.1148
+    },
+    {
+      "benchmark_run_id": 93,
+      "dis_no": "2018-0137-IND",
+      "disaster_type": "Storm",
+      "country": "India",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 364.8,
+      "iou": 0.0236
+    },
+    {
+      "benchmark_run_id": 94,
+      "dis_no": "2018-0138-IND",
+      "disaster_type": "Storm",
+      "country": "India",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 1.9,
+      "iou": 0.0
+    },
+    {
+      "benchmark_run_id": 95,
+      "dis_no": "2018-0473-IND",
+      "disaster_type": "Storm",
+      "country": "India",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 288.2,
+      "iou": 0.2657
+    },
+    {
+      "benchmark_run_id": 96,
+      "dis_no": "2018-0118-CHN",
+      "disaster_type": "Storm",
+      "country": "China",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 298.2,
+      "iou": 0.1745
+    },
+    {
+      "benchmark_run_id": 97,
+      "dis_no": "2018-0305-CHN",
+      "disaster_type": "Storm",
+      "country": "China",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.2,
+      "centroid_distance_km": 469.1,
+      "iou": 0.0092
+    },
+    {
+      "benchmark_run_id": 98,
+      "dis_no": "2018-0431-IND",
+      "disaster_type": "Storm",
+      "country": "India",
+      "gt_source": "gdis",
+      "verdict": "inconclusive",
+      "confidence": 0.25,
+      "centroid_distance_km": 63.6,
+      "iou": 0.4708
+    }
+  ]
+}

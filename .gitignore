@@ -1,0 +1,40 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.uv-cache/
+
+.env
+.env.*
+!.env.template
+
+data/cache/
+data/raw/
+data/tiles/
+*.tif
+*.tiff
+*.jp2
+
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+.DS_Store
+.idea/
+.vscode/
+.acled_tokens.json
+
+# Local DB dump — full data, never commit
+data/beacon_local_dump.sql
+data/feedback.jsonl
+
+# Streamlit secrets — only template ships
+.streamlit/secrets.toml
+
+# Big or noisy data — keep eval_snapshots only
+data/*.log
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
+data/raw/
