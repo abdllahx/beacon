@@ -34,24 +34,62 @@ st.caption(
 )
 
 
+# Only these claim_ids ship their PNG tiles to the public demo (see .gitignore
+# whitelist). Other runs would render blank images on Streamlit Cloud, so we
+# hide them in the hosted environment. Local dev shows everything.
+PUBLIC_DEMO_CLAIM_IDS = {11, 12, 13, 111, 113, 116, 119, 124, 127, 134}
+HOSTED = bool(os.getenv("DATABASE_URL"))  # set on Streamlit Cloud, unset locally
+
+
 @st.cache_data(ttl=10)
 def load_runs():
     with db.connect() as conn, conn.cursor() as cur:
-        cur.execute(
-            """
-            SELECT v.id, v.claim_id, a.title, a.url, a.source, a.published_at,
-                   c.admin_region, ST_AsGeoJSON(c.bbox) AS bbox_geojson,
-                   v.imagery_metadata, v.vision_verdict, v.final_verdict,
-                   v.final_report_md, v.translations, v.article_summary, v.status
-            FROM verification_runs v
-            JOIN claims c ON c.id = v.claim_id
-            JOIN articles a ON a.id = c.article_id
-            WHERE v.status IN ('vision_done', 'synth_done')
-            ORDER BY v.id DESC
-            """
-        )
+        if HOSTED:
+            cur.execute(
+                """
+                SELECT v.id, v.claim_id, a.title, a.url, a.source, a.published_at,
+                       c.admin_region, ST_AsGeoJSON(c.bbox) AS bbox_geojson,
+                       v.imagery_metadata, v.vision_verdict, v.final_verdict,
+                       v.final_report_md, v.translations, v.article_summary, v.status
+                FROM verification_runs v
+                JOIN claims c ON c.id = v.claim_id
+                JOIN articles a ON a.id = c.article_id
+                WHERE v.status IN ('vision_done', 'synth_done')
+                  AND v.claim_id = ANY(%s)
+                ORDER BY v.id DESC
+                """,
+                (list(PUBLIC_DEMO_CLAIM_IDS),),
+            )
+        else:
+            cur.execute(
+                """
+                SELECT v.id, v.claim_id, a.title, a.url, a.source, a.published_at,
+                       c.admin_region, ST_AsGeoJSON(c.bbox) AS bbox_geojson,
+                       v.imagery_metadata, v.vision_verdict, v.final_verdict,
+                       v.final_report_md, v.translations, v.article_summary, v.status
+                FROM verification_runs v
+                JOIN claims c ON c.id = v.claim_id
+                JOIN articles a ON a.id = c.article_id
+                WHERE v.status IN ('vision_done', 'synth_done')
+                ORDER BY v.id DESC
+                """
+            )
         cols = [d[0] for d in cur.description]
         return [dict(zip(cols, r, strict=False)) for r in cur.fetchall()]
+
+
+def _show_image(col, path: str | None, **kwargs) -> bool:
+    """Render tile image when path resolves to a real file (or URL). Returns True if rendered."""
+    if not path:
+        return False
+    if path.startswith(("http://", "https://")):
+        col.image(path, **kwargs)
+        return True
+    if os.path.exists(path):
+        col.image(path, **kwargs)
+        return True
+    col.caption(f"_(tile not bundled in hosted demo)_")
+    return False
 
 
 @st.cache_data(ttl=30)
@@ -192,15 +230,11 @@ if run.get("article_summary"):
 # ─── Sentinel-2 TCI ──────────────────────────────────────────────────────
 st.markdown("#### Sentinel-2 True Color")
 img_cols = st.columns(2)
-if (s2_before_path := (s2.get("before") or {}).get("path")):
-    img_cols[0].caption("BEFORE")
-    img_cols[0].image(s2_before_path, use_container_width=True)
-else:
+img_cols[0].caption("BEFORE")
+if not _show_image(img_cols[0], (s2.get("before") or {}).get("path"), use_container_width=True):
     img_cols[0].warning("No BEFORE tile available")
-if (s2_after_path := s2_after.get("path")):
-    img_cols[1].caption("AFTER")
-    img_cols[1].image(s2_after_path, use_container_width=True)
-else:
+img_cols[1].caption("AFTER")
+if not _show_image(img_cols[1], s2_after.get("path"), use_container_width=True):
     img_cols[1].warning("No AFTER tile available")
 
 # ─── dNBR delta ──────────────────────────────────────────────────────────
@@ -209,8 +243,8 @@ if dnbr.get("path"):
     burn_pct = dnbr.get("burn_pct")
     badge = f" — {burn_pct:.1f}% pixels above Key & Benson moderate-burn threshold" if burn_pct is not None else ""
     st.markdown(f"#### dNBR (Normalized Burn Ratio delta){badge}")
-    st.image(dnbr["path"], use_container_width=True,
-             caption="Red = severe burn (positive dNBR), green = unburned/regrowth")
+    _show_image(st, dnbr["path"], use_container_width=True,
+                caption="Red = severe burn (positive dNBR), green = unburned/regrowth")
 
 # ─── Sentinel-1 SAR change ───────────────────────────────────────────────
 s1_change = s1.get("change") or {}
@@ -218,16 +252,16 @@ if s1_change.get("path"):
     dec_pct = s1_change.get("decrease_pct")
     badge = f" — {dec_pct:.1f}% pixels with > 3 dB backscatter drop" if dec_pct is not None else ""
     st.markdown(f"#### Sentinel-1 SAR change (cloud-penetrating){badge}")
-    st.image(s1_change["path"], use_container_width=True,
-             caption="Red = backscatter decrease (flood/burn), green = increase (new structures)")
+    _show_image(st, s1_change["path"], use_container_width=True,
+                caption="Red = backscatter decrease (flood/burn), green = increase (new structures)")
 
 # ─── SegFormer land-cover segmentation ───────────────────────────────────
 seg = s2_after.get("segmentation") or {}
 if seg.get("mask_path"):
     st.markdown("#### SegFormer land-cover segmentation (HF: Image Segmentation)")
     seg_cols = st.columns([2, 1])
-    seg_cols[0].image(seg["mask_path"], use_container_width=True,
-                      caption=f"ADE20K classes overlaid · model: {seg.get('model','')}")
+    _show_image(seg_cols[0], seg["mask_path"], use_container_width=True,
+                caption=f"ADE20K classes overlaid · model: {seg.get('model','')}")
     top = seg.get("top") or []
     if top:
         seg_cols[1].caption("Top classes by area")
@@ -240,8 +274,8 @@ if det.get("overlay_path"):
     n_obj = det.get("n_objects", 0)
     st.markdown(f"#### DETR object detection — {n_obj} objects (HF: Object Detection)")
     det_cols = st.columns([2, 1])
-    det_cols[0].image(det["overlay_path"], use_container_width=True,
-                      caption=f"Bounding boxes · model: {det.get('model','')}")
+    _show_image(det_cols[0], det["overlay_path"], use_container_width=True,
+                caption=f"Bounding boxes · model: {det.get('model','')}")
     classes_count = det.get("classes_count") or {}
     if classes_count:
         det_cols[1].caption("Detected classes")
@@ -277,8 +311,7 @@ if vdr_matches:
         path = m.get("tile_path")
         sim = m.get("similarity", 0)
         desc = m.get("description") or m.get("disaster_type") or ""
-        if path:
-            col.image(path, use_container_width=True)
+        _show_image(col, path, use_container_width=True)
         col.caption(f"sim {sim:.3f} · {desc[:70]}")
 
 # ─── FIRMS ground-truth ──────────────────────────────────────────────────

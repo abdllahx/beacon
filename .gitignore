@@ -10,7 +10,19 @@ __pycache__/
 
 data/cache/
 data/raw/
-data/tiles/
+data/tiles/*
+# Whitelist: 10 best supported runs (Palisades, Park Fire, Maui + 7 GDIS supported)
+# only PNGs ship — .npy raster arrays stay local
+!data/tiles/claim_11_*.png
+!data/tiles/claim_12_*.png
+!data/tiles/claim_13_*.png
+!data/tiles/claim_111_*.png
+!data/tiles/claim_113_*.png
+!data/tiles/claim_116_*.png
+!data/tiles/claim_119_*.png
+!data/tiles/claim_124_*.png
+!data/tiles/claim_127_*.png
+!data/tiles/claim_134_*.png
 *.tif
 *.tiff
 *.jp2
