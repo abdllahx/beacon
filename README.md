@@ -1,6 +1,9 @@
 # Beacon — Multimodal Geospatial Event Verification
 
 [![tests](https://github.com/abdllahx/beacon/actions/workflows/test.yml/badge.svg)](https://github.com/abdllahx/beacon/actions/workflows/test.yml)
+[![demo](https://img.shields.io/badge/live%20demo-streamlit-ff4b4b?logo=streamlit&logoColor=white)](https://beacon-rt7qkydjptf7vm8ccpua5r.streamlit.app/)
+
+**Live demo:** https://beacon-rt7qkydjptf7vm8ccpua5r.streamlit.app/
 
 A production-grade agent system that detects claims in global news (natural disasters, conflict events, deforestation, humanitarian crises) and autonomously verifies or refutes them by cross-referencing recent satellite imagery, producing cited, evidence-backed verification reports.
 
@@ -110,7 +113,9 @@ See [EVAL.md](EVAL.md) for the full methodology, prior-version critique, and sna
 | 2023 Donnie Creek (BC) | inconclusive (0.40) | 0% | — | (varies) |
 | 2023 Rhodes (Greece) | inconclusive (0.40) | 0% | — | (varies) |
 
-Run the dashboard: `uv run beacon ui` → http://localhost:8501
+**Live:** [beacon-rt7qkydjptf7vm8ccpua5r.streamlit.app](https://beacon-rt7qkydjptf7vm8ccpua5r.streamlit.app/) — backed by Neon Postgres + Langfuse Cloud, HITL writes password-locked.
+
+**Local:** `uv run beacon ui` → http://localhost:8501
 
 ## Quickstart
 

@@ -110,5 +110,5 @@ In 2026 the AI-engineering job market is full of "I built a RAG chatbot" portfol
 ---
 
 **Code:** [github.com/abdllahx/beacon](https://github.com/abdllahx/beacon)
-**Demo:** [beacon.streamlit.app](https://beacon.streamlit.app) *(once deployed)*
+**Demo:** [beacon-rt7qkydjptf7vm8ccpua5r.streamlit.app](https://beacon-rt7qkydjptf7vm8ccpua5r.streamlit.app/)
 **License:** MIT.
