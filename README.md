@@ -93,7 +93,7 @@ The full DAG (`uv run beacon graph-render`) has **21 nodes** with **6-way parall
 | Vision/text models | 9 HuggingFace tasks (table above) | All via free Inference Providers or local CPU |
 | Demo UI | Streamlit | Single-file, all 9 modalities visible |
 
-## Eval methodology (v2 — honest)
+## Eval methodology
 
 The benchmark feeds the pipeline **only synthesized article text** (built from EM-DAT structured fields). Extract → geocode → imagery → vision all run from text alone, and the resulting bbox is compared against **GDIS peer-reviewed centroids** (Rosvold & Buhaug 2021, *Sci. Data*).
 
