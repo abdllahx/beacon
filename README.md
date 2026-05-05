@@ -1,4 +1,4 @@
-# Beacon — Multimodal Geospatial Event Verification
+# Beacon - Multimodal Geospatial Event Verification
 
 [![tests](https://github.com/abdllahx/beacon/actions/workflows/test.yml/badge.svg)](https://github.com/abdllahx/beacon/actions/workflows/test.yml)
 [![demo](https://img.shields.io/badge/live%20demo-streamlit-ff4b4b?logo=streamlit&logoColor=white)](https://beacon-rt7qkydjptf7vm8ccpua5r.streamlit.app/)
